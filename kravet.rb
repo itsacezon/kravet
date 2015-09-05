@@ -10,7 +10,7 @@ require 'identicon'
 
 configure do
   set :database, 'sqlite:///kravet_db'
-  puts "Table doesn't exist" if !database.table_exists?('kravet_db')
+  puts "Table doesn't exist. Run `sqlite3 kravet_db`." if !database.table_exists?('kravet_db')
 
   # require "./config/data"
 
@@ -19,7 +19,7 @@ configure do
   set :scss, {:style => :compressed, :debug_info => false}
 
   enable :sessions
-  set :session_secret, '$2a$10$NYB.Sk0xxjDIpTvztIAn7.8Max3BXCLLnEzTSUZ3ghM2.PHAD3c0G'
+  set :session_secret, '740b206810a71246bc0de7fe38c562c1a6dac27b60742742f29d4b3ace039427'
 end
 
 get '/css/:name.css' do |name|
