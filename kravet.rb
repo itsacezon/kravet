@@ -10,7 +10,7 @@ require 'identicon'
 
 configure do
   set :database, 'sqlite:///kravet_db'
-  puts "Table doesn't exist" if !database.table_exists?('foos')
+  puts "Table doesn't exist" if !database.table_exists?('kravet_db')
 
   # require "./config/data"
 
