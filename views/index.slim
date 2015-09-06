@@ -1,4 +1,24 @@
-.panel.panel-hero
-  article
-    h1 On-point Delivery.
-    p Yay Content.
+#map
+
+#list
+  h5.list__header Marine products near you
+  .cards--carousel
+    - for @fish in @fishes do
+      .card.marine__product
+        .card__image style="background-image:url('#{@fish[1]}');"
+          .card__image-overlay
+            i.icon-cross.js-marine__product-deselect
+            .button__group
+              a.button.marine__more-info href="#0" Info
+              a.button.marine__buy href="#0" Buy
+        .card__body
+          .card__header
+            h6.marine__name = @fish[0]
+            h6.marine__price ₱#{rand(100..1000)}
+          .card__info
+            p.marine__availability
+              span.card__info--header Availability:
+              span< #{rand(10000..100000)}
+            p.marine__pickup-center
+              span.card__info--header Pickup center:
+              span< Dagupan, Pangasinan

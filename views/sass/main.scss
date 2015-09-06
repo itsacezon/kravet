@@ -10,3 +10,388 @@ body {
 
   background-color: #f5f7fa;
 }
+
+#map {
+  @include size(100% 536px);
+  border: 0;
+
+  &.fit {
+    height: 100%;
+  }
+}
+
+#list {
+  position: relative;
+  background-color: #e9e9e9;
+  border-top: 1px #dadada solid;
+
+  &:before {
+    @include position(absolute, 0 null null 0);
+    @include size(72px 100%);
+    background: linear-gradient(to right, rgba(#e9e9e9, 1) 0%, rgba(#e9e9e9, 0) 100%);
+    z-index: 2;
+    content: ' ';
+  }
+  &:after {
+    @include position(absolute, 0 0 null null);
+    @include size(72px 100%);
+    background: linear-gradient(to left, rgba(#e9e9e9, 1) 0%, rgba(#e9e9e9, 0) 100%);
+    z-index: 2;
+    content: ' ';
+  }
+}
+
+.list__header {
+  margin: 16px 0 10px 0;
+  padding-left: 72px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+#nav--main {
+  @include size(100% 54px);
+  position: fixed;
+  z-index: 5;
+
+  //background: linear-gradient(to bottom, rgba(#e9e9e9, 1) 0%, rgba(#e9e9e9, 0) 100%);
+  background: transparent;
+  //border-bottom: 1px #dadada solid;
+
+}
+
+.nav__container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.nav__logo {
+  @include border-bottom-radius(6px);
+
+  float: left;
+  line-height: 54px;
+  font-size: 22px;
+  font-weight: 700;
+  background-color: white;
+  padding: 0 14px;
+
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+}
+
+.nav__search {
+  @include border-bottom-radius(6px);
+
+  float: left;
+  line-height: 54px;
+  margin-left: 14px;
+  padding: 0 14px;
+  background-color: white;
+
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+
+  form {
+    margin-bottom: 0;
+  }
+
+  input {
+    margin-bottom: 0;
+    border: none;
+    min-width: 320px;
+
+    &:focus {
+      border: none;
+    }
+  }
+
+  .icon-search {
+    position: relative;
+    top: -2px;
+    color: #888;
+  }
+}
+
+.nav__user {
+  @include border-bottom-radius(6px);
+
+  float: right;
+  line-height: 54px;
+  margin-left: 14px;
+  padding: 0 14px;
+  background-color: white;
+
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+
+  img {
+    @include size(32px);
+    position: relative;
+    top: 10px;
+    margin-right: 8px;
+    border-radius: 16px;
+    border: 1px #dadada solid;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+  }
+}
+
+.container {
+  @include row();
+  position: relative;
+  padding-top: 48px;
+}
+
+.search-result--header {
+  height: 400px;
+  background-image: url('../img/fisherman-687074_1920.jpg');
+  background-attachment: fixed;
+  background-position: center -200px;
+  background-size: cover;
+}
+
+
+.media {
+  @include row();
+}
+
+.featured__result {
+  margin-top: -96px;
+  margin-bottom: 2em;
+  background-color: white;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.12);
+
+  .featured__header {
+    @include span-columns(12);
+    height: 48px;
+    padding: 10px 12px;
+
+    h5 {
+      margin-bottom: 0;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .featured__map {
+    @include span-columns(6);
+    height: 240px;
+  }
+
+  .featured__body {
+    @include span-columns(6);
+    height: 240px;
+  }
+}
+
+.cards--carousel {
+  @include calc(height, '100% + 26px');
+  position: relative;
+  top: -80px;
+  z-index: 1;
+
+  padding: 0 64px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.cards--recommended {
+  .card {
+    @include span-columns(3);
+    @include omega(4n);
+    margin-left: 0;
+    margin-bottom: 1.5em;
+  }
+}
+
+.card {
+  @include transition(350ms);
+  @include transition-timing-function(cubic-bezier(0.23,1,0.32,1));
+  @include user-select(none);
+
+  margin: 0 8px;
+  display: inline-block;
+  background-color: white;
+  border-radius: 6px;
+  width: 236px;
+
+  cursor: pointer;
+
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+}
+
+.card__image {
+  @include transition(250ms);
+  @include size(100% 164px);
+  @include border-top-radius(6px);
+
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px #ececec solid;
+}
+
+.card__image-overlay {
+  @include position(absolute, 0 0 0 0);
+  @include transition(350ms);
+  @include border-top-radius(6px);
+  background-color: rgba(black, 0.65);
+  cursor: default;
+
+  opacity: 0;
+  visibility: hidden;
+
+  .icon-cross {
+    @include position(absolute, 12px 12px null null);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .button__group {
+    @include position(absolute, 50% null null 50%);
+    @include transform(translateX(-50%) translateY(-50%));
+  }
+}
+
+.card__body {
+  padding: 12px;
+}
+
+.card__header {
+  @include row();
+
+  h6 {
+    margin-bottom: 0;
+  }
+}
+
+.card__info {
+  p {
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &--header {
+    font-weight: 700;
+  }
+}
+
+.button__group {
+  @include row();
+
+  button, .button {
+    @include transition(350ms);
+    padding: 0 20px;
+
+    font-size: 12px;
+    line-height: 30px;
+
+    border: none;
+    border-radius: 4px;
+
+    height: auto;
+  }
+}
+
+.marine__image {
+  @include span-columns(6);
+  background-size: cover;
+  background-position: center;
+  height: 240px;
+
+}
+.marine__body {
+  @include span-columns(6);
+
+  h4 {
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  p {
+    margin-bottom: 14px;
+
+    &.card__info--header {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.marine__product {
+  position: relative;
+  z-index: 0;
+  top: 82px;
+
+  &.selected {
+    top: 10px;
+  }
+  &.selected .card__image-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.marine__name {
+  float: left;
+  font-weight: 600;
+}
+
+.marine__price {
+  float: right;
+  font-weight: 400;
+  color: #78C042;
+}
+
+.marine__availability {
+  padding-top: 4px;
+}
+.marine__pickup-center {
+}
+
+.button.marine__more-info--block {
+  margin-bottom: 0;
+  border: 1px #888 solid;
+  color: #888;
+
+  &:hover {
+    color: #333;
+    border-color: #333;
+  }
+}
+.button.marine__more-info {
+  margin-bottom: 0;
+  border: 1px white solid;
+  color: white;
+
+  &:hover {
+    color: #888;
+    border-color: #888;
+  }
+}
+.button.marine__buy {
+  margin-bottom: 0;
+  margin-left: 8px;
+  background-color: #4285f4;
+  color: white;
+
+  &:hover {
+    background-color: mix(black, #4285f4, 25%);
+    color: white;
+  }
+}
