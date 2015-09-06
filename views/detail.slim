@@ -1,0 +1,82 @@
+.detail--header
+
+.container
+  .media.featured__result
+    .featured__map.featured__map--detail
+      #map.fit
+    .featured__body.featured__body--detail
+      .media.mg-b-16
+        .media__image.marine__image style="background-image:url('#{@fish["photo"]}');"
+        .media__body.marine__body
+          h3 = @fish["fish"]
+          p.card__info--header Availability:
+          p style="#{!@available ? 'color:#e3262e;' : 'color:#78C042;' }" #{@available ? "Abundant" : "Scarce"} - #{@quantity.to_s}
+
+          p.card__info--header Pickup center:
+          p #{@regions.keys.sample}
+
+          p.card__info--header Schedule:
+          p style="#{!@available ? 'text-decoration:line-through;' : '' }" Monday, 6AM - 6PM
+      .media
+
+        - if @available
+
+          form
+            .row
+              .six.columns
+                label Quantity
+                input.u-full-width type="number" min="15" max="1000" value="15"
+              .six.columns
+                label Payment Method
+                select.u-full-width
+                  option Paypal
+                  option DragonPay
+                  option GCash
+                  option SmartMoney
+            .row
+              .nine.columns
+                label Note
+                input.u-full-width type="text" placeholder="Leave a note to the fisherman. :)"
+              .three.columns
+                label.u-hidden Test
+                a.button.marine__buy.mg-l-0 href="#0" Buy
+
+        - else
+
+          p.card__info--header.mg-b-0 Reasons for unavailability:
+          ul.list--disc
+            li Reason 1
+            li Reason 2
+            li Reason 3
+
+  .media.featured__result.mg-t-0.pd-24
+    h4 Historical data
+    table.u-full-width
+      thead
+        tr
+          th Region
+          th 2009
+          th 2010
+          th 2011
+          th 2012
+          th 2013
+      tbody
+        - for region in @fish["region"]
+          tr
+            td = region[0]
+            - for i in region[1] do
+              td = i
+              
+  h5 Recommended for you
+  .cards--recommended
+    - for @fish in @fishes do
+      .card
+        .card__image style="background-image:url('#{@fish[1]}');"
+        .card__body
+          .card__header
+            h6.marine__name = @fish[0]
+            h6.marine__price ₱#{rand(100..1000)}
+          .card__info
+            p.marine__availability
+              span.card__info--header Availability:
+              span< #{rand(10000..100000)}

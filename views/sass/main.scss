@@ -158,6 +158,13 @@ body {
   background-size: cover;
 }
 
+.detail--header {
+  height: 480px;
+  background-image: url('../img/corals.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
 
 .media {
   @include row();
@@ -185,11 +192,21 @@ body {
   .featured__map {
     @include span-columns(6);
     height: 240px;
+
+    &--detail {
+      height: 480px;
+    }
   }
 
   .featured__body {
     @include span-columns(6);
     height: 240px;
+
+    &--detail {
+      height: 480px;
+      padding-top: 26px;
+      padding-right: 26px;
+    }
   }
 }
 
@@ -319,7 +336,7 @@ body {
 .marine__body {
   @include span-columns(6);
 
-  h4 {
+  h4, h3 {
     margin-bottom: 8px;
     font-weight: 700;
   }
@@ -394,4 +411,70 @@ body {
     background-color: mix(black, #4285f4, 25%);
     color: white;
   }
+}
+
+
+
+#legend {
+  background: #FFF;
+  border-radius: 6px;
+  padding: 14px;
+  margin: 14px;
+  font-size: 12px;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.22);
+}
+.color {
+  position: relative;
+  top: 2px;
+  border: 1px solid;
+  height: 12px;
+  width: 12px;
+  margin-right: 4px;
+  float: left;
+}
+.red {
+  background: #C00;
+}
+.yellow {
+  background: #FF3;
+}
+.green {
+  background: #6F0;
+}
+.blue {
+  background: #06C;
+}
+.purple {
+  background: #63C;
+}
+
+.mg-t-0 {
+  margin-top: 0 !important;
+}
+.mg-b-0 {
+  margin-bottom: 0 !important;
+}
+.mg-b-16 {
+  margin-bottom: 16px !important;
+}
+.mg-b-24 {
+  margin-bottom: 24px !important;
+}
+.mg-l-0 {
+  margin-left: 0 !important;
+}
+.pd-24 {
+  padding: 24px !important;
+}
+
+.list--disc {
+  margin-top: 12px;
+  margin-left: 20px;
+  list-style: disc;
+}
+
+.u-hidden {
+  opacity: 0;
+  visibility: hidden;
 }

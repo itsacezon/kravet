@@ -5,11 +5,6 @@ $(document).ready(function() {
 
   $('.marine__product').click(function(e) {
     $('.marine__product').removeClass('selected');
-
-    $('.cards--carousel').animate({
-      //scrollLeft: $(this).position().left
-    }, 500);
-
     $(this).addClass('selected');
   });
 

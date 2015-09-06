@@ -3,20 +3,20 @@
 .container
   .media.featured__result
     .featured__header
-      h5 Results for '#{@query}'
+      h5 Results for '#{@fish["fish"]}'
     .featured__map
       #map.fit
     .featured__body
       .media
-        .media__image.marine__image style="background-image:url('http://cdn.wn.com/ph/img/fb/19/6509918639ef5a981859c4dc0c59-grande.jpg');"
+        .media__image.marine__image style="background-image:url('#{@fish["photo"]}');"
         .media__body.marine__body
-          h4 = @query
+          h4 = @fish["fish"]
           p.card__info--header Availability:
           p< #{@available ? "Abundant" : "Scarce"} - #{@quantity.to_s}
           p.card__info--header Pickup center:
           p< Dagupan, Pangasinan
           .button__group
-            a.button.marine__more-info--block href="#0" More Info
+            a.button.marine__more-info--block href="/detail/2" More Info
 
             - if @available
 
@@ -26,10 +26,10 @@
   .cards--recommended
     - for @fish in @fishes do
       .card
-        .card__image style="background-image:url('#{@fish[1]}');"
+        .card__image style="background-image:url('#{@fish["photo"]}');"
         .card__body
           .card__header
-            h6.marine__name = @fish[0]
+            h6.marine__name = @fish["fish"]
             h6.marine__price ₱#{rand(100..1000)}
           .card__info
             p.marine__availability

@@ -2,7 +2,7 @@ doctype html
 html
   head
     meta charset="utf-8"
-    title Kravet
+    title Marinê | Sustaining the Blue Economy
 
     link rel="stylesheet" href="/css/fonts.css"
     link rel="stylesheet" href="/css/feather.css"
@@ -33,9 +33,10 @@ html
       function initMap() {
         var latitude = $('body').data('lat'),
             longtitude = $('body').data('long');
+        var bounds = new google.maps.LatLngBounds();
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
+          zoom: 15,
           center: {lat: latitude, lng: longtitude},
           disableDefaultUI: true
         });
@@ -46,7 +47,80 @@ html
           map.setCenter(center);
         });
 
+        if (document.location.pathname == "/") {
+          // Try W3C Geolocation (Preferred)
+          if(navigator.geolocation) {
+            browserSupportFlag = true;
+            navigator.geolocation.getCurrentPosition(function(position) {
+              initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+              map.setCenter(initialLocation);
+            }, function() {
+              handleNoGeolocation(browserSupportFlag);
+            });
+          }
+          // Browser doesn't support Geolocation
+          else {
+            browserSupportFlag = false;
+            handleNoGeolocation(browserSupportFlag);
+          }
+
+          function handleNoGeolocation(errorFlag) {
+            if (errorFlag == true) {
+              alert("Geolocation service failed.");
+              initialLocation = newyork;
+            } else {
+              alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
+              initialLocation = siberia;
+            }
+            map.setCenter(initialLocation);
+          }
+        }
+
         var markers = $.parseJSON($('body').attr('data-markers'));
+        if (markers != null && markers.length > 0) {
+          for( i = 0; i < markers.length; i++ ) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+              position: position,
+              map: map,
+              title: markers[i][0]
+            });
+
+            // Allow each marker to have an info window
+            // google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            //   return function() {
+            //     infoWindow.setContent(infoWindowContent[i][0]);
+            //     infoWindow.open(map, marker);
+            //   }
+            // })(marker, i));
+
+            // Automatically center the map fitting all markers on the screen
+            map.fitBounds(bounds);
+          }
+        }
+
+        var layer = new google.maps.FusionTablesLayer({
+          query: {
+            select: 'Location',
+            from: '1NIVOZxrr-uoXhpWSQH2YJzY5aWhkRZW0bWhfZw'
+          },
+          map: map
+        });
+
+        // Create the legend and display on the map
+        var legend = document.createElement('div');
+        legend.id = 'legend';
+        var content = [];
+        content.push('<h6 style="font-weight:700;margin-bottom:10px;">Legend</h6>');
+        content.push('<div style="margin-bottom:4px;"><div class="color red"></div>Red Tide</div>');
+        content.push('<div style="margin-bottom:4px;"><div class="color yellow"></div>Overfishing</div>');
+        content.push('<div style="margin-bottom:4px;"><div class="color green"></div>Breeding Sites</div>');
+        content.push('<div style="margin-bottom:4px;"><div class="color blue"></div>Available Fishing Spots</div>');
+        content.push('<div style="margin-bottom:4px;"><div class="color purple"></div>Coral Reefs</div>');
+        legend.innerHTML = content.join('');
+        legend.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
       }
 
     script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfYHxMPQ2QXw3oT3mjeK_VVB380ArcThE&callback=initMap" async=true defer=true
