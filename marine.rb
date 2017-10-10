@@ -10,8 +10,8 @@ require 'identicon'
 require 'json'
 
 configure do
-  set :database, 'sqlite:///kravet_db'
-  puts "Table doesn't exist. Run `sqlite3 kravet_db`." if !database.table_exists?('kravet_db')
+  set :database, 'sqlite:///marine_db'
+  puts "Table doesn't exist. Run `sqlite3 marine_db`." if !database.table_exists?('marine_db')
 
   require "./config/data"
   # required "./config/migrations"
